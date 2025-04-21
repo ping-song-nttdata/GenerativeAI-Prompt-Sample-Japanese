@@ -363,16 +363,19 @@ Make a list of the pros and cons of companies implementing ChatGPT.
 
 Note: The following is a sample is in Japanese.
 
-```cmd
 [Simulate Meeting](/会議/ディスカッションをさせる.md)
+
+
+```cmd
 
 As for how to think, try something other than lateral thinking.
 
 Define the direction of thought:
-
+```
 Note: The following is a sample is in Japanese.
 
-[Direction of Thought](/README.md#gpt-の思考の方向性を調整する)
+[Direction of Thought](/高度なテクニック/README.md#3-思考の方向性を示す言葉たち)
+
 
 ## 2.4. Application Prototyping Development
 
@@ -388,7 +391,7 @@ It takes 10-15 minutes (in fact, it has been halved in the last few months)
 
 Note: The following is a sample is in Japanese.
 
-[Proto-Typing](/Software%20Enginner/Webアプリのプロトタイプ開発/)
+[Proto-Typing](/Software%20Engineer/アプリのプロトタイプ開発/)
 
 # 3. Ask ChatGPT to review
 
