@@ -1,0 +1,8 @@
+# Ignore Jekyll build directory
+/_site/
+
+# Sass cache
+.sass-cache/
+
+# Dependency directory
+/vendor/
