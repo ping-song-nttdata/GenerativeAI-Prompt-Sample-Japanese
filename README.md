@@ -25,16 +25,6 @@ https://learn.microsoft.com/ja-jp/azure/cognitive-services/openai/overview
 ## 4. Prompt Engineering Basic
 https://github.com/microsoft/OpenAIWorkshop/tree/main/scenarios/prompt_engineering
 
-# Hello World - はじめの一歩
-
-ChatGPT の基礎的な Prompt です。
-
-# Prompt 
-
-```cmd
-### 役割 ###
-関西の方として振舞ってください。
-```
 ## 作成途中のものを続けてもらう
 
 ChatGPTに限らずLLMには出力トークン数の制限があります。出力途中で「終わった」という扱いになる事があります。プログラムコードを作成してもらっている際などには、良く遭遇します。
@@ -45,8 +35,11 @@ ChatGPTに限らずLLMには出力トークン数の制限があります。出�
 作業を続けてください。
 ```
 
-
 # 参考
+
+日本語ならではのPromptでの言葉不足の原因や対策についての神Blog by @hisaho さん
+
+https://qiita.com/hisaho/items/1e3aba7e0b1b43e44dc5
 
 各種Prompt Engineeringの日本語実例集（Zero-CoT、mock、ReAct、ToT、Metacog、Step Back、IEPなど） by @YutaroOgawa2 さん
 

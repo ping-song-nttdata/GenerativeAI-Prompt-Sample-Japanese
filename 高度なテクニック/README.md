@@ -145,6 +145,24 @@ Prompt:
 https://www.youtube.com/live/YX0_GvD0jkE
 
 
+**具体性**を追及した
+
+```cmd
+以下のプロンプトを、具体性を高めた形に改善してください。
+```
+
+```cmd
+以下のプロンプトを具体的かつ明確に改善してください。
+```
+
+```cmd
+以下のプロンプトを異なるアプローチで3つ改善してください。
+```
+
+(参考): @hisaho さんのBlog:
+
+https://qiita.com/hisaho/items/1e3aba7e0b1b43e44dc5#53-%E7%94%9F%E6%88%90ai%E3%81%AB%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%81%AE%E6%B7%BB%E5%89%8A%E3%82%92%E3%81%95%E3%81%9B%E3%82%8B
+
 # 5. SELF-DISCOVER: Large Language Models Self-Compose Reasoning Structures
 
 https://arxiv.org/abs/2402.03620
