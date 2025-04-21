@@ -5,16 +5,125 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title }} | {{ site.title }}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      padding: 1rem;
+      background-color: #f6f8fa;
+      border-bottom: 1px solid #e1e4e8;
+    }
+    .main-container {
+      display: flex;
+      flex: 1;
+    }
+    .sidebar {
+      width: 250px;
+      padding: 1rem;
+      background-color: #f6f8fa;
+      border-right: 1px solid #e1e4e8;
+      overflow-y: auto;
+      max-height: calc(100vh - 100px);
+    }
+    .sidebar ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .sidebar li {
+      margin-bottom: 0.5rem;
+    }
+    .sidebar li ul {
+      padding-left: 1rem;
+    }
+    .sidebar a {
+      text-decoration: none;
+      color: #0366d6;
+    }
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+    .current-page {
+      font-weight: bold;
+    }
+    .folder-name {
+      font-weight: bold;
+      color: #24292e;
+      cursor: pointer;
+    }
+    main {
+      flex: 1;
+      padding: 2rem;
+    }
+    footer {
+      padding: 1rem;
+      text-align: center;
+      background-color: #f6f8fa;
+      border-top: 1px solid #e1e4e8;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
   </header>
-  <main class="markdown-body">
-    {{ content }}
-  </main>
+  <div class="main-container">
+    <nav class="sidebar">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="current-page"{% endif %}>ホーム</a></li>
+        {% assign sorted_pages = site.pages | sort: "path" %}
+        {% assign root_folders = "" | split: "" %}
+        {% for p in sorted_pages %}
+          {% if p.path contains '/' and p.path != 'index.md' and p.path != '_config.yml' %}
+            {% assign folder_parts = p.path | split: '/' %}
+            {% assign root_folder = folder_parts[0] %}
+            {% unless root_folders contains root_folder %}
+              {% assign root_folders = root_folders | push: root_folder %}
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
+        
+        {% for folder in root_folders %}
+          <li>
+            <span class="folder-name">{{ folder }}</span>
+            <ul style="display: block;">
+              {% assign folder_pages = site.pages | where_exp: "item", "item.path contains folder" | sort: "path" %}
+              {% for p in folder_pages %}
+                {% if p.title and p.path contains '.md' %}
+                  <li><a href="{{ p.url | relative_url }}" {% if page.url == p.url %}class="current-page"{% endif %}>{{ p.title }}</a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <main class="markdown-body">
+      {{ content }}
+    </main>
+  </div>
   <footer>
     <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const folderNames = document.querySelectorAll('.folder-name');
+      folderNames.forEach(function(folder) {
+        folder.addEventListener('click', function() {
+          const subList = this.nextElementSibling;
+          if (subList.style.display === "none" || subList.style.display === "") {
+            subList.style.display = "block";
+          } else {
+            subList.style.display = "none";
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
