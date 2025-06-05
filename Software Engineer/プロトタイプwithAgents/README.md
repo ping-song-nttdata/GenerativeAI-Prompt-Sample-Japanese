@@ -133,7 +133,7 @@ GitHub Copilot Coding Agentに、HTMLの画面とAPIの連携を作成しても�
 
 ## 4.1. APIの一覧取得
 
-**GitHub Copilot for Azure**を使って、APIの一覧取得のコードを作成します。
+Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧取得のコードを作成します。
 ```
 @azure Azure Functionsで動作しているREST APIの一覧を作成します。API名とURLをリストアップしてください。
 ```
@@ -149,8 +149,81 @@ GitHub Copilot Coding Agentに、HTMLの画面とAPIの連携を作成しても�
 - Webアプリケーションの場所: app
   - JavaScriptのファイルの場所: app/js
 
+# 関数の分類の例
+## フロントエンド（Front）で主に実装・担当する関数
+
+1. **イベントハンドラー**
+   - 画面上のユーザー操作（クリック、入力、送信など）に反応する関数
+   - 例: `onClickButton()`, `onInputChange()`
+
+2. **UI操作・DOM操作**
+   - 画面の表示・非表示、要素の追加・削除・更新など
+   - 例: `showModal()`, `updateListView()`
+
+3. **バリデーション（クライアント側）**
+   - 入力値の形式チェックや必須項目の確認など
+   - 例: `validateEmailFormat()`, `checkRequiredFields()`
+
+4. **状態管理（クライアント側）**
+   - 画面の状態や一時的なデータの保持
+   - 例: `setCurrentTab()`, `updateLocalState()`
+
+5. **初期化・セットアップ**
+   - ページロード時の初期化処理
+   - 例: `initPage()`, `loadInitialView()`
+
+6. **エラーハンドリング（UI通知）**
+   - エラー発生時の画面表示やユーザー通知
+   - 例: `showErrorMessage()`
+
+7. **ユーティリティ（フロント専用）**
+   - 画面表示用のフォーマット変換など
+   - 例: `formatDisplayDate()`
+
+## バックエンド（Backend）で主に実装・担当する関数（将来REST API化する候補）
+
+1. **データアクセス・データ取得**
+   - データベースや外部サービスとのやりとり
+   - 例: `fetchUserList()`, `saveOrderData()`
+
+2. **データ加工・変換（ビジネスロジック）**
+   - データの集計、フィルタリング、計算など
+   - 例: `calculateTotalAmount()`, `filterActiveUsers()`
+
+3. **バリデーション（サーバー側）**
+   - セキュリティや整合性のための入力チェック
+   - 例: `validateUserInputOnServer()`
+
+4. **状態管理（サーバー側）**
+   - ユーザーセッションやアプリ全体の状態管理
+   - 例: `updateUserSession()`
+
+5. **API通信**
+   - REST APIとして外部公開する関数
+   - 例: `getUserDataAPI()`, `postOrderAPI()`
+
+6. **エラーハンドリング（サーバー側）**
+   - サーバーでのエラー処理やログ記録
+   - 例: `logError()`, `returnErrorResponse()`
+
+7. **ユーティリティ（サーバー専用）**
+   - サーバー側でのみ必要な共通処理
+   - 例: `hashPassword()`, `generateToken()`
+
+
 それぞれの.jsファイルから、最適なAzure Functions上のAPIを呼び出すように修正をしてください。
 
 # Azure Functions REST API 仕様書
 {4.1. APIの一覧取得で取得したAPIの仕様書をここに貼り付ける}
 ```
+# 5. データを永続保存
+
+データをAzure Cosmos DBへ保存をします。
+
+
+Visual Studio Code の **GitHub Copilot for Azure**を使って、APIで使用しているデータをバックアップします。
+
+```cmd
+@azure Azure Cosmos DBにデータを移行させます。このAPIの中のデータを全て削除してもいいように、全てのデータをテキストファイルに出力してください。既存のコードは一切変更しないでください。
+```
+
