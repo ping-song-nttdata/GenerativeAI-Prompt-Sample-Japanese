@@ -91,7 +91,9 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 
 - 参照されるアプリケーション
   - [生産調整エージェント]
+    - フォルダー名: adjustment-agent
   - [KPIモニタリングアプリケーション]
+    - フォルダー名: kpi-monitoring-app
 - HTML5のみで、それぞれの画面を参照する。独自の画面は作らない
 - [KPIモニタリングアプリケーション]を画面の左に表示させる。[生産調整エージェント]を画面の右に表示させる
 - 画面は左右の仕切りのバーをマウスでドラックアンドドロップして、その割合を動かせるようにする
