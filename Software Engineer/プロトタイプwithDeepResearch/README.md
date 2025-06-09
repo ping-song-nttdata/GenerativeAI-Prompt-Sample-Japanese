@@ -15,7 +15,7 @@ https://github.blog/news-insights/product-news/github-copilot-meet-the-new-codin
 - 現時点でプレビューです。プロダクション環境での利用には十二分に注意をしてください。Pull Requestをマージするかどうかは、**人**の判断ですので!
 - AzureとCDで連携した後は、CopilotがPRを実行している際にGitHub Actionsでのジョブ実行を行います。その際に私たち人によるApprovalが必要です。ただ、そのGitHub Actionsのジョブがエラーになることがあります。
 
-![Job Errorの例](/Software%20Engineer/プロトタイプwithAgents/images/image.png)
+![Job Errorの例](/Software%20Engineer/プロトタイプwithDeepResearch//images/image.png)
 
 - その際には、PRのコメントに以下の様な指示をして、GitHub Copilotに修正をさせるのも手です。
 
@@ -36,7 +36,7 @@ https://learn.microsoft.com/ja-jp/azure/developer/github-copilot-azure/introduct
 
 ここでおススメのツールは上記とは**別**で、Microsoft 365 Copilot Researcherです。
 
-[要求定義の作成](/Software%20Engineer/プロトタイプwithAgents/要求定義作成.md)
+[要求定義の作成](/Software%20Engineer/プロトタイプwithDeepResearch/要求定義作成.md)
 
 
 # 2. UI 作成
@@ -57,7 +57,7 @@ Webアプリケーションのプロトタイプを作成してください。
 - 機能ID（Requirement ID）: {あれば}
 
 # 作成場所
-- フォルダー: app
+- フォルダー: {app}
 
 # 技術仕様
 - HTML5のみ
@@ -95,11 +95,11 @@ Azure Functionsで動作するREST APIのアプリケーションのプロトタ
 このAPIは以下のアプリケーションの中のJavaScriptのコードからREST APIで呼び出されます。
 
 # 作成フォルダー
-- api
+- {api}
 
 # 呼び出し元のWebアプリケーション
-- アプリケーション名: app
-- JavaScriptのファイルの場所: app/js
+- アプリケーション名: {app}
+- JavaScriptのファイルの場所: {app}/js
 	- それぞれの.jsファイルから、新規に作成するAPIを呼び出す
 
 # 技術仕様
@@ -114,7 +114,7 @@ Azure Functionsで動作するREST APIのアプリケーションのプロトタ
 - 日本語の詳細なセットアップ手順書を作成する。手順書は作成フォルダーの中に作成する
 
 # APIに実装する機能
-- knowledgeshare-app/jsの関数の中で、HTMLの画面とやり取りするところは除外する
+- {app}/jsの関数の中で、HTMLの画面とやり取りするところは除外する
 - それ以外のコードを、全てAPIとして実装する
 - サンプルデータは、全てデータ管理のAPIの中に実装する
 ```
@@ -146,8 +146,8 @@ Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧�
 既存のJavaScriptのコードの中から、Azure Functions上で動作しているREST APIを呼び出すように修正をしてください。
 
 # 変更対象
-- Webアプリケーションの場所: app
-  - JavaScriptのファイルの場所: app/js
+- Webアプリケーションの場所: {app}
+  - JavaScriptのファイルの場所: {app}/js
 
 # 関数の分類の例
 ## フロントエンド（Front）で主に実装・担当する関数
