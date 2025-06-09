@@ -89,6 +89,9 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 ```cmd
 以下のアプリケーションの画面を一度に見る事ができる、[生産調整アプリケーション]を作成する
 
+
+- フォルダー: app
+
 - 参照されるアプリケーション
   - [生産調整エージェント]
     - フォルダー名: adjustment-agent
