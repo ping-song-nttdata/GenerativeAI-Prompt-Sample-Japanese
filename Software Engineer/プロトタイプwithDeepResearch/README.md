@@ -36,13 +36,17 @@ Microsoft Azure のSDKを使う場合は、GitHub Copilot for Azure を使いま
 https://learn.microsoft.com/ja-jp/azure/developer/github-copilot-azure/introduction
 
 
-# 1. 業務要件などビジネス面のドキュメントの整備
+# 0. 業務要件などビジネス面のドキュメントの整備
 
 こちらのドキュメントを参考にしてください。
 
 ここでおススメのツールは上記とは**別**で、Microsoft 365 Copilot Researcherです。
 
 [要求定義の作成](/Software%20Engineer/プロトタイプwithDeepResearch/要求定義作成.md)
+
+# 1. GitHubのRepositoryの作成
+
+GitHubのRepositoryを作成します。GitHub Copilot Coding Agentが作業をするためのリポジトリーです。
 
 
 # 2. Custom Instructionsの作成
@@ -304,7 +308,7 @@ GitHub Copilot Coding Agentに、HTMLの画面とAPIの連携を作成しても�
 
 Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧取得のコードを作成します。
 ```
-@azure Azure Functionsで動作しているREST APIの一覧を作成します。API名とURLをリストアップして、Markdown書式で作成してください。
+@azure Azure Functionsの関数一覧を作成してください。関数名、FQDN付のURL、関数の説明、入出力の詳細な説明を含めてください。Markdownの書式で作成してください。
 ```
 
 ## 5.2. REST APIの呼び出し
@@ -339,3 +343,47 @@ https://learn.microsoft.com/ja-jp/azure/cosmos-db/nosql/quickstart-portal
 
 (Work in progresss)
 
+## 6.1. Azure Functionsのアカウントから、Azure Cosmos DBのNoSQL APIへ接続するための
+認証・認可設定 - マネージドIDの設定
+
+Azure Functionsから、Azure Cosmos DBへの認証を、マネージドIDを使って行います。
+
+Azure Cosmos DBの
+
+
+チュートリアル: マネージ ID と SQL バインドを使用して Azure SQL に関数アプリを接続する:
+
+https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity
+
+- このドキュメントは、Azure SQL Databaseを使っていますが、Azure Cosmos DBのNoSQL APIでも同様の手順で設定が可能です。
+
+
+Azure Functions 2.x 以降での Azure Cosmos DB のトリガー:
+
+https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-bindings-cosmosdb-v2-trigger?tabs=python-v2%2Cisolated-process%2Cextensionv4%2Cnodejs-v4&pivots=programming-language-csharp#identity-based-connections
+
+
+
+## 6.2. Azure Comsmos DBへのデータ登録処理の実装
+
+Azure FunctionsのREST APIの中に、Azure Cosmos DBへデータを登録する処理を実装します。
+
+GitHub Copilot Coding AgentのIssueです。
+
+```cmd
+Azure FunctionsのREST APIの中に、Azure Cosmos DBのNoSQL APIへデータを登録する処理を実装してください。
+
+# Applicationの場所
+- api/{api-name}
+
+# タスク
+- 既存のコードの中のデータモデルで定義されているデータ構造を参照します。Azure Cosmos DBのNoSQL APIのドキュメントを参照して、データ登録の処理を実装してください。
+- 適切なデータベース、コンテナの作成もしてください。
+- 既存のサンプルデータ作成の処理はコメントアウトしてください。
+
+# Azure Cosmos DBのNoSQL APIのURI
+- {Azure Cosmos DBのNoSQL APIのURIをここに貼り付ける}
+
+# 参考ドキュメント:
+- https://learn.microsoft.com/ja-jp/azure/cosmos-db/nosql/quickstart-dotnet
+```
