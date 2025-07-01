@@ -11,6 +11,12 @@ GitHub Copilot の **Coding Agent**のIssueからCoding Agentに作業をして�
 
 https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/
 
+## 必読ドキュメント!!!
+
+Copilot を使用してタスクに取り組むためのベスト プラクティス
+
+https://docs.github.com/ja/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks
+
 
 - 現時点でプレビューです。プロダクション環境での利用には十二分に注意をしてください。Pull Requestをマージするかどうかは、**人**の判断ですので!
 - AzureとCDで連携した後は、CopilotがPRを実行している際にGitHub Actionsでのジョブ実行を行います。その際に私たち人によるApprovalが必要です。ただ、そのGitHub Actionsのジョブがエラーになることがあります。
@@ -30,7 +36,7 @@ Microsoft Azure のSDKを使う場合は、GitHub Copilot for Azure を使いま
 https://learn.microsoft.com/ja-jp/azure/developer/github-copilot-azure/introduction
 
 
-# 1. 業務要件などビジネス面のドキュメントの整備
+# 0. 業務要件などビジネス面のドキュメントの整備
 
 こちらのドキュメントを参考にしてください。
 
@@ -38,14 +44,42 @@ https://learn.microsoft.com/ja-jp/azure/developer/github-copilot-azure/introduct
 
 [要求定義の作成](/Software%20Engineer/プロトタイプwithDeepResearch/要求定義作成.md)
 
+# 1. GitHubのRepositoryの作成
 
-# 2. UI 作成
+GitHubのRepositoryを作成します。GitHub Copilot Coding Agentが作業をするためのリポジトリーです。
+
+
+# 2. Custom Instructionsの作成
+
+GitHubのRepositoryに、GitHub Copilot Coding Agentがより正確にタスクを実行できるようなcopilot-instructions.mdファイルを作成します。
+
+```cmd
+GitHub Copilotのリポジトリーで、GitHub Copilot coding Agentが、より正確にタスクを実行できるようなcopilot-instructions.mdファイルを作成します。
+
+以下のサイトも参考にして、最適なcopilot-instructions.mdファイルのファイル指示を作成してください。
+https://docs.github.com/ja/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot?tool=webui
+
+# 留意事項
+- アプリケーションやAPIは、別フォルダーに作成する
+- プログラム言語のベストプラクティスに従う
+- マイクロサービスで設計すること
+- 全ての機能は疎結合であること
+- Microsoft Azureの各サービスの仕様は、以下のドキュメントから検索して参照すること
+    https://learn.microsoft.com/ja-jp/azure/?product=popular
+```
+
+Copilot を使用してタスクに取り組むためのベスト プラクティス:
+
+https://docs.github.com/ja/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#adding-custom-instructions-to-your-repository
+
+
+# 3. UI 作成
 
 **サンプルデータ**と、**機能要件のドキュメント**を添付します。
 
 GitHub Copilot Coding AgentのIssueとして使います。Copilot君にIssueをAssignして、Issueのコメントに以下の様な内容を書いてください。
 
-## 2.1. Webアプリケーションのプロトタイプ作成
+## 3.1. Webアプリケーションのプロトタイプ作成
 
 ```cmd
 Webアプリケーションのプロトタイプを作成してください。
@@ -58,8 +92,8 @@ Webアプリケーションのプロトタイプを作成してください。
 - {機能要件の中から1つ}
 - 機能ID（Requirement ID）: {あれば}
 
-# 作成場所
-- フォルダー: {app}
+# 作成フォルダー
+- {app}
 
 # 技術仕様
 - HTML5のみ
@@ -71,7 +105,7 @@ Webアプリケーションのプロトタイプを作成してください。
 {サンプルデータやデータモデルのドキュメント
 
 # ノート
-- README.md は、日本語で作成する
+- README.md は、日本語で作成フォルダーの中に作成する。
 ```
 
 完成したら、Azure Static Web Appsにデプロイをします。これはAzureのPortalから行うのが簡単です。プロトタイプだという事もありまして。
@@ -82,15 +116,17 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 
 - 最初の[リポジトリを作成する]は**不要**です。私たちはすでにGitHubのリポジトリを持っていますので。
 
-## 2.2. 複数のWeb画面を一度に表示
+## 3.2. 複数のWeb画面を一度に表示
 
 複数のWeb画面を一度に表示させる際には、以下の様なIssueを作成して、GitHub Copilot Coding Agentに作業をしてもらいます。
 
 ```cmd
 以下のアプリケーションの画面を一度に見る事ができる、[生産調整アプリケーション]を作成する
 
-- フォルダー: /
+# 作成フォルダー
+ - /
 
+# 技術仕様
 - 参照されるアプリケーション
   - [生産調整エージェント]
     - フォルダー名: adjustment-agent
@@ -103,17 +139,20 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 - 現在あるすべてのGitHub Actionsは削除する
 
 # ノート
-- README.md は、日本語で作成する
+- README.md は、日本語で作成フォルダーの中に作成する。
 ```
 
-## 2.3. マルチエージェントのグループチャットのサンプル
+## 3.3. マルチエージェントのグループチャットのサンプル
 
 マルチエージェントのグループチャットのサンプルです。
 
 ```cmd
 [KPIモニタリングアプリケーション]と連携して、AIエージェントが生産の変更が可能かどうかを議論して、その議論の経過状況を確認できる画面を作成してください。
 
-- フォルダー: adjustment-agent
+# 作成フォルダー
+- adjustment-agent
+
+# 技術仕様
 - デモ用。サンプルデータを作成して、それを使う
 - HTML5のみ
 - 画面はチャットの形式
@@ -131,10 +170,10 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 - 調整後に、調整結果の要約を作成して画面に表示する
 
 # ノート
-- README.md は、日本語で作成する
+- README.md は、日本語で作成フォルダーの中に作成する。
 ```
 
-# 3. API 作成
+# 4. REST API 作成
 
 Github Copilot Coding Agentに**API**のプロトタイプを作成してもらいます。ただし、Azure FunctionsのSDKのコードは不正確なことが多いです。
 ひな形まで作ってもらって。
@@ -144,6 +183,11 @@ GitHub Copilot Coding AgentのIssueです。
 
 終了後は、Visual Studio Codeで、**自分で実行確認をする**ことを強くお勧めします。GitHub Codespaceだと、GitHub Copilotで幾つか使えるモデルが少なかったり、SDKのインストールが追加で必要だったりするので、開発を継続することを考えると、**自分のPCやMacのVisual Studio Code**での開発・テストの実施をお勧めします。
 
+Azure Functions でサポートされている言語:
+https://learn.microsoft.com/ja-jp/azure/azure-functions/supported-languages?tabs=isolated-process%2Cv4&pivots=programming-language-csharp
+
+
+Azure Functionsのプロトタイプを作成するためのIssueです。
 ```cmd
 Azure Functionsで動作するREST APIのアプリケーションのプロトタイプを作成してください。
 このAPIは以下のアプリケーションの中のJavaScriptのコードからREST APIで呼び出されます。
@@ -160,7 +204,8 @@ Azure Functionsで動作するREST APIのアプリケーションのプロトタ
 - Azure Functions v4
 - C#
 - .NET9.0
-- Trigger: HTTP / inもoutも
+- Trigger: HTTP
+- Bind: inもoutもHTTP
 
 # タスク
 - APIが完成してAzure Functionsにデプロイをした後で、Webアプリケーション側のコードの変更を行う
@@ -168,45 +213,11 @@ Azure Functionsで動作するREST APIのアプリケーションのプロトタ
 - 日本語の詳細なセットアップ手順書を作成する。手順書は作成フォルダーの中に作成する
 
 # APIに実装する機能
-- {app}/jsの関数の中で、HTMLの画面とやり取りするところは除外する
-- それ以外のコードを、全てAPIとして実装する
+- {APIの分類の例}を参考にして、JavaScriptの関数をフロントエンドとバックエンドに分類して実装する
+- バックエンドのAPIのみを、Azure Functionsで実装する
 - サンプルデータは、全てデータ管理のAPIの中に実装する
 
-# ノート
-- README.md は、日本語で作成する
-```
-
-
-完成したら、Azure Functionsにデプロイをします。Visual Studio Codeから行うのが簡単です。
-
-クイックスタート: Visual Studio Code を使用して Azure に C# 関数を作成する:
-
-https://learn.microsoft.com/ja-jp/azure/azure-functions/create-first-function-vs-code-csharp
-
-開発言語に応じて、周辺からドキュメントを探してみてください。
-
-# 4. HTMLの画面とAPIの連携
-GitHub Copilot Coding Agentに、HTMLの画面とAPIの連携を作成してもらいます。
-
-## 4.1. APIの一覧取得
-
-Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧取得のコードを作成します。
-```
-@azure Azure Functionsで動作しているREST APIの一覧を作成します。API名とURLをリストアップしてください。
-```
-
-## 2. APIの呼び出し
-
-タスクとしてGitHubのIssueとして管理したい事もあり。GitHub Copilot Coding AgentにAPIの呼び出しを作成してもらいます。
-
-```cmd
-既存のJavaScriptのコードの中から、Azure Functions上で動作しているREST APIを呼び出すように修正をしてください。
-
-# 変更対象
-- Webアプリケーションの場所: {app}
-  - JavaScriptのファイルの場所: {app}/js
-
-# 関数の分類の例
+# APIの分類の例
 ## フロントエンド（Front）で主に実装・担当する関数
 
 1. **イベントハンドラー**
@@ -267,20 +278,112 @@ Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧�
    - サーバー側でのみ必要な共通処理
    - 例: `hashPassword()`, `generateToken()`
 
+# ノート
+- README.md は、日本語で作成フォルダーの中に作成する。
+```
+
+Coding Agentの作業が終了するまで待ちます。終了後のbranchは**削除せずに**残しておいてください**。後で、Visual Studio Codeでの開発に使います。
+
+- Visual Studio CodeやGitHub Desktopなどを使って、Coding Agentが作成したコードをローカルにクローンします。
+- Visual Studio Codeで、Azure Functions Toolsなどを使って、ローカルでの動作確認をします。
+
+クイックスタート: Visual Studio Code を使用して Azure に C# 関数を作成する:
+
+https://learn.microsoft.com/ja-jp/azure/azure-functions/create-first-function-vs-code-csharp
+
+## 4.1. Azure Functionsへデプロイ
+
+Azure Functionsへデプロイをします。Visual Studio Codeから行うのが簡単です。
+
+クイックスタート: Visual Studio Code を使用して Azure に C# 関数を作成する:
+
+https://learn.microsoft.com/ja-jp/azure/azure-functions/create-first-function-vs-code-csharp
+
+開発言語に応じて、周辺からドキュメントを探してみてください。
+
+# 5. HTMLの画面とREST APIの連携
+GitHub Copilot Coding Agentに、HTMLの画面とAPIの連携を作成してもらいます。
+
+## 5.1. APIの一覧取得
+
+Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧取得のコードを作成します。
+```
+@azure Azure Functionsの関数一覧を作成してください。関数名、FQDN付のURL、関数の説明、入出力の詳細な説明を含めてください。Markdownの書式で作成してください。
+```
+
+## 5.2. REST APIの呼び出し
+
+タスクとしてGitHubのIssueとして管理したい事もあり。GitHub Copilot Coding AgentにAPIの呼び出しを作成してもらいます。
+
+```cmd
+既存のJavaScriptのコードの中から、Azure Functions上で動作しているREST APIを呼び出すように修正をしてください。
+
+# 変更対象
+- Webアプリケーションの場所: {app}
+  - JavaScriptのファイルの場所: {app}/js
 
 それぞれの.jsファイルから、最適なAzure Functions上のAPIを呼び出すように修正をしてください。
 
 # Azure Functions REST API 仕様書
-{4.1. APIの一覧取得で取得したAPIの仕様書をここに貼り付ける}
+{5.1. APIの一覧取得で取得したAPIの仕様書をここに貼り付ける}
 ```
-# 5. データを永続保存
+
+# 6. データを永続保存
 
 データをAzure Cosmos DBへ保存をします。
 
+## 6.1. Azure Cosmos DBの作成
 
-Visual Studio Code の **GitHub Copilot for Azure**を使って、APIで使用しているデータをバックアップします。
+Azure Portalから、Azure Cosmos DBを作成します。NoSQL APIを選択してください。
+Serverlessプランを選択するのがおススメです。
+
+クイックスタート: Azure portal を使用して Azure Cosmos DB for NoSQL アカウントを作成する
+
+https://learn.microsoft.com/ja-jp/azure/cosmos-db/nosql/quickstart-portal
+
+(Work in progresss)
+
+## 6.1. Azure Functionsのアカウントから、Azure Cosmos DBのNoSQL APIへ接続するための
+認証・認可設定 - マネージドIDの設定
+
+Azure Functionsから、Azure Cosmos DBへの認証を、マネージドIDを使って行います。
+
+Azure Cosmos DBの
+
+
+チュートリアル: マネージ ID と SQL バインドを使用して Azure SQL に関数アプリを接続する:
+
+https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity
+
+- このドキュメントは、Azure SQL Databaseを使っていますが、Azure Cosmos DBのNoSQL APIでも同様の手順で設定が可能です。
+
+
+Azure Functions 2.x 以降での Azure Cosmos DB のトリガー:
+
+https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-bindings-cosmosdb-v2-trigger?tabs=python-v2%2Cisolated-process%2Cextensionv4%2Cnodejs-v4&pivots=programming-language-csharp#identity-based-connections
+
+
+
+## 6.2. Azure Comsmos DBへのデータ登録処理の実装
+
+Azure FunctionsのREST APIの中に、Azure Cosmos DBへデータを登録する処理を実装します。
+
+GitHub Copilot Coding AgentのIssueです。
 
 ```cmd
-@azure Azure Cosmos DBにデータを移行させます。このAPIの中のデータを全て削除してもいいように、全てのデータをテキストファイルに出力してください。既存のコードは一切変更しないでください。
-```
+Azure FunctionsのREST APIの中に、Azure Cosmos DBのNoSQL APIへデータを登録する処理を実装してください。
 
+# Applicationの場所
+- api/{api-name}
+
+# タスク
+- 既存のコードの中のデータモデルで定義されているデータ構造を参照します。Azure Cosmos DBのNoSQL APIのドキュメントを参照して、データ登録の処理を実装してください。
+- 適切なデータベース、コンテナの作成もしてください。
+- 既存のサンプルデータ作成の処理はコメントアウトしてください。
+
+# Azure Cosmos DBのNoSQL APIのURI
+- {Azure Cosmos DBのNoSQL APIのURIをここに貼り付ける}
+
+# 参考ドキュメント:
+- https://learn.microsoft.com/ja-jp/azure/cosmos-db/nosql/quickstart-dotnet
+```
