@@ -298,7 +298,7 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 - 現在あるすべてのGitHub Actionsは削除する
 
 # ノート
-- README.md は、日本語で作成フォルダーの中に作成する。
+- README.md は、作成フォルダーの中に日本語で作成する。
 ```
 
 ## 3.3. マルチエージェントのグループチャットのサンプル
