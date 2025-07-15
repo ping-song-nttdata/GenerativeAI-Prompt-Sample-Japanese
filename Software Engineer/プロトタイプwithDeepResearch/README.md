@@ -55,12 +55,25 @@ GitHubのRepositoryに、GitHub Copilot Coding Agentがより正確にタスク�
 
 以下、例、です。
 
+Microsoft DocsとAzureのMCP Serverの指定がある点に注意してください。不要な場合は削除してください。
+
 ```cmd
 ## Microsoftの公式ドキュメントの検索
 
 あなたは **MicrosoftDoc** という MCP サーバーにアクセスすることができます。このツールを使用することで、Microsoft の最新の公式ドキュメントを検索することが可能であり、その情報は、あなたの学習データセットに含まれている内容よりも詳細であったり、新しいものである可能性があります。
 
 Microsoft Azure、C#、F#、ASP.NET、Microsoft.Extensions、NuGet、など、Microsoft のネイティブ技術の取り扱いに関する質問に対応する際には、特に具体的または限定的な内容に関する場合、このツールを調査目的で使用するようにしてください。
+
+## Microsoft Azureのリソースの検索
+
+あなたは **Azure** という MCP サーバーにアクセスすることができます。このツールを使用することで、Azure Model Context Protocol (MCP) サーバーには、自然言語プロンプトを使用して Azure サービスを操作するために既存のクライアントから使用できる多くのツールが公開されています。 たとえば、Azure MCP サーバーを使用して、Visual Studio Code の GitHub Copilot エージェント モードまたは次のようなコマンドを使用して他の AI エージェントから Azure リソースと対話できます。
+
+- "すべてのリソース グループを表示する"
+- "'documents' という名前のストレージ コンテナー内の BLOB を一覧表示する"
+- "アプリ構成の 'ConnectionString' キーの値は何ですか?
+- "過去 1 時間のエラーをログ分析ワークスペースに照会する"
+- "すべての Cosmos DB データベースを表示する"
+
 
 ## リポジトリ構成
 
@@ -230,7 +243,7 @@ GitHub Copilot Coding AgentのIssueとして使います。Copilot君にIssueを
 ```cmd
 Webアプリケーションのプロトタイプを作成してください。
 
-添付のドキュメントはソフトウェアの機能要件です。この中の{機能要件の中から1つ}だけを作成します。
+添付のドキュメントはソフトウェアの機能要件です。この中の{範囲}で指定した機能要件だけを作成します。
 
 {機能要件ドキュメント}
 
@@ -251,7 +264,7 @@ Webアプリケーションのプロトタイプを作成してください。
 {サンプルデータやデータモデルのドキュメント
 
 # ノート
-- README.md は、日本語で作成フォルダーの中に作成する。
+- README.md は、作成フォルダーの中に日本語で作成する。
 ```
 
 完成したら、Azure Static Web Appsにデプロイをします。これはAzureのPortalから行うのが簡単です。プロトタイプだという事もありまして。
@@ -296,7 +309,7 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 [KPIモニタリングアプリケーション]と連携して、AIエージェントが生産の変更が可能かどうかを議論して、その議論の経過状況を確認できる画面を作成してください。
 
 # 作成フォルダー
-- adjustment-agent
+- app/adjustment-agent
 
 # 技術仕様
 - デモ用。サンプルデータを作成して、それを使う
@@ -316,7 +329,7 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 - 調整後に、調整結果の要約を作成して画面に表示する
 
 # ノート
-- README.md は、日本語で作成フォルダーの中に作成する。
+- README.md は、作成フォルダーの中に日本語で作成する。
 ```
 
 # 4. REST API 作成
@@ -425,7 +438,7 @@ Azure Functionsで動作するREST APIのアプリケーションのプロトタ
    - 例: `hashPassword()`, `generateToken()`
 
 # ノート
-- README.md は、日本語で作成フォルダーの中に作成する。
+- README.md は、作成フォルダーの中に日本語で作成する。
 ```
 
 Coding Agentの作業が終了するまで待ちます。終了後のbranchは**削除せずに**残しておいてください**。後で、Visual Studio Codeでの開発に使います。
