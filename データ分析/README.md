@@ -13,7 +13,7 @@ Microsoft 365 Copilot のAnalystなどを使って、構造化データの分析
 特に知りたい事は、{項目名・列名など}が増えているかどうか、です。
 ```
 
-## 一般的なモデル (GPT-4やo3, o4など)用
+# 一般的なモデル (GPT-4やo3, o4など)用
 
 このテキストはPrompt-ZoomItのDemoType用に複数回のPromptを含んでいます。
 Microsoft 365 Copilotを使う場合は、分析対象としたいファイルをアップロード後に、以下のPromptを入力してください。
