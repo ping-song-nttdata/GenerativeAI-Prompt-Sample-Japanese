@@ -58,6 +58,10 @@ GitHubのRepositoryに、GitHub Copilot Coding Agentがより正確にタスク�
 Microsoft DocsとAzureのMCP Serverの指定がある点に注意してください。不要な場合は削除してください。
 
 ```cmd
+## ガイダンス
+GitHub Copilot Coding Agentは、以下のガイドラインに従ってタスクを実行します。
+- プランの作成や実行に情報が不足している場合は、ユーザーに尋ねてください
+
 ## Microsoftの公式ドキュメントの検索
 
 あなたは **MicrosoftDoc** という MCP サーバーにアクセスすることができます。このツールを使用することで、Microsoft の最新の公式ドキュメントを検索することが可能であり、その情報は、あなたの学習データセットに含まれている内容よりも詳細であったり、新しいものである可能性があります。
@@ -73,7 +77,6 @@ Microsoft Azure、C#、F#、ASP.NET、Microsoft.Extensions、NuGet、など、Mi
 - "アプリ構成の 'ConnectionString' キーの値は何ですか?
 - "過去 1 時間のエラーをログ分析ワークスペースに照会する"
 - "すべての Cosmos DB データベースを表示する"
-
 
 ## リポジトリ構成
 
