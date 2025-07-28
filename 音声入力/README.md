@@ -8,7 +8,7 @@
 
 Prompt:
 
-```cmd
+```text
 ### 役割 
 あなたはChatGPTのPromptに詳しい日本語の専門家です。
 

@@ -28,7 +28,7 @@ Scenario:
 I'm late for a meeting with an important customer. After it was over, I decided to send an email apologizing. Thailand would like my boss to correct my email, but my boss is away due to family urgency. Ask ChatGPT to correct this email.
 
 Prompt:
-```cmd
+```text
 ### Instructions
 Please create the best possible apology formal email according to the following Text for the customer executive person.
 Please list the explanation of reason of why you corrected as an improvement point.
@@ -48,7 +48,7 @@ I've been accepted into a new role. There are a few products that need to be pro
 Modify expert sentences into plain language that anyone can understand.
 
 Prompt:
-```cmd
+```text
 ### Role
 You are a kindergarten teacher. He is very good at talking to children.
 
@@ -100,7 +100,7 @@ Replace the <<email body>> in the prompt with the actual email body.
 
 Prompt:
 
-```cmd
+```text
 ### Instructions
 Please summarize the email below.
 
@@ -115,7 +115,7 @@ Scenario:
 
 Same as above.
 
-```cmd
+```text
 ### Instructions
 Please make a list of each {item} in the email below. If you don't understand something, please mark it as "[Unknown]".
 
@@ -137,7 +137,7 @@ Please make a list of each {item} in the email below. If you don't understand so
 
 If you don't have an email body that you can use right away, please use 😊 the text of this email as an example
 
-```cmd
+```text
 Daiyu Hatakeyama
 
 Mr./Ms. Hatakeyama, thank you for your quick response.
@@ -185,7 +185,7 @@ In this example, "wow" is the word or sentence you want to Thailand that you act
 ### Basics
 
 Prompt:
-```cmd
+```text
 Do not print explanatory text.
 
 It's awesome, isn't it? Mr./Ms. Hatakeyama's coolness. : Positive, 100 point
@@ -200,7 +200,7 @@ Scenario:
 This is similar to the previous scenario. The engineer said he wanted the data in JSON. You can create it in JSON format from Excel, but you can't install the additional application on the company PC. That's why we want ChatGPT to create data in JSON format for Thailand.
 
 Prompt:
-```cmd
+```text
 
 {
     "Comment": "That's awesome, how cool Mr./Ms. Hatakeyama is",
@@ -228,7 +228,7 @@ Scenario:
 In the email, you talk about multiple items in sentences. In fact, each of them has something in common, but it is difficult to understand it just by reading the text, and I think it is Thailand to check whether you have a common understanding with the other person. So, I ask them to type in a sentence and create a table of data for me.
 
 Prompt:
-```cmd
+```text
 ### Instructions
 Unstructured sentences are provided. Create data in CSV format with it
 
@@ -245,7 +245,7 @@ Training companies have never covered the topic before. I need to make the final
 
 Prompt:
 
-```cmd
+```text
 ### Role
 You are an expert in educating students in LLMs at universities and other higher professional educational institutions.
 
@@ -264,7 +264,7 @@ That's why we want ChatGPT to create Mr./Ms. code for Thailand.
 Execute the following Prompt to create an HTML string. Copy the string to a text editor such as Notepad and save it to a location of your choice with the file name "helloworld.html". Open the file in any browser, type your name in the text box, and press the button.
 
 Prompt:
-```cmd
+```text
 Write JavaSctipt program code that does the following:
 
 ### Web screen configuration
@@ -292,7 +292,7 @@ During the meeting, the topic of "Japan people are busy" came up. However, there
 I heard that various survey information is often published on the Internet. In particular, survey reports by governments, government offices, local governments, and universities are often published on websites or in PDF formats. Therefore, we would like Thailand to create a report based on that information.
 
 Prompt:
-```cmd
+```text
 In major countries such as Japan, please display data on what tasks and how much time employees are spending on each task. Whenever possible, create trends from the past with your data.
 You should also create a sentence summarizing each piece of data.
 If you have multiple years of data for one data, display the data in a tabular format.
@@ -307,7 +307,7 @@ If you can use **Microsoft Edge** in your web browser  , please continue with:
 - Click the **Copilot icon** in the upper right corner of your browser to bring up Microsoft Edge Copilot. 
 - Enter a Prompt similar to the following:
 
-```cmd
+```text
 Summarize this page.
 ```
 
@@ -319,7 +319,7 @@ https://www.microsoft.com/ja-jp/edge/features/copilot?form=MA13FJ
 If you are interested in other research subjects, please refer to ... Sorry the all of the following is in Japanese.
 
 Prompt:
-```cmd
+```text
 What are the major business challenges in manufacturing? Find out more about the following:
 
 - Challenges: What specific challenges are there?
@@ -357,7 +357,7 @@ After "### condition ###", please replace it with the one you are currently disc
 For **{Info}** , enter the following prompt in Bing Chat to gather information. 
 
 例:
-```cmd
+```text
 Make a list of the pros and cons of companies implementing ChatGPT.
 ```
 
@@ -366,7 +366,7 @@ Note: The following is a sample is in Japanese.
 [Simulate Meeting](/会議/ディスカッションをさせる.md)
 
 
-```cmd
+```text
 
 As for how to think, try something other than lateral thinking.
 
@@ -405,7 +405,7 @@ Of course, it would be nice if there was someone who was familiar with Prompt wh
 Here, I'll ask ChatGPT itself to review the prompt I wrote.
 
 Prompt:
-```cmd
+```text
 What prompt should I have entered at the very beginning to resolve this issue efficiently? Create a prompt for it and a description of the improvement.
 Take a deep breath and take it one step at a time.
 ```

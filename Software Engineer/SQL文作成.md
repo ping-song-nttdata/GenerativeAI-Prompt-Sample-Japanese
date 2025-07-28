@@ -29,7 +29,7 @@ sales_qty: 販売数量
 
 こうすると、こんなQ&Aができます。
 
-```cmd
+```text
 Q: 売上データの合計を教えて
 ```
 
@@ -39,7 +39,7 @@ A: 売上データの合計は以下のSQL文で取得できます。 
 SELECT SUM(sales_qty) as total_sales FROM sales;  
 ```
 
-```cmd
+```text
 Q: 2023年３月の顧客ごとの売り上げデータを教えて
 ```
 

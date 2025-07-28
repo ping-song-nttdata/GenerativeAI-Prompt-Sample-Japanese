@@ -25,7 +25,7 @@ https://docs.github.com/ja/copilot/using-github-copilot/coding-agent/best-practi
 
 - その際には、PRのコメントに以下の様な指示をして、GitHub Copilotに修正をさせるのも手です。
 
-```cmd
+```text
 reviewのチェックで、github actionsのジョブがエラーになりました。原因をリストアップして、解決策を考えて、修正をしてください。
 @copilot 
 ```
@@ -57,7 +57,7 @@ GitHubのRepositoryに、GitHub Copilot Coding Agentがより正確にタスク�
 
 Microsoft DocsとAzureのMCP Serverの指定がある点に注意してください。不要な場合は削除してください。
 
-```cmd
+```text
 ## ガイダンス
 GitHub Copilot Coding Agentは、以下のガイドラインに従ってタスクを実行します。
 - プランの作成や実行に情報が不足している場合は、ユーザーに尋ねてください
@@ -243,7 +243,7 @@ GitHub Copilot Coding AgentのIssueとして使います。Copilot君にIssueを
 
 ## 3.1. Webアプリケーションのプロトタイプ作成
 
-```cmd
+```text
 Webアプリケーションのプロトタイプを作成してください。
 
 添付のドキュメントはソフトウェアの機能要件です。この中の{範囲}で指定した機能要件だけを作成します。
@@ -282,7 +282,7 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 
 複数のWeb画面を一度に表示させる際には、以下の様なIssueを作成して、GitHub Copilot Coding Agentに作業をしてもらいます。
 
-```cmd
+```text
 以下のアプリケーションの画面を一度に見る事ができる、[生産調整アプリケーション]を作成する
 
 # 作成フォルダー
@@ -308,7 +308,7 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 
 マルチエージェントのグループチャットのサンプルです。
 
-```cmd
+```text
 [KPIモニタリングアプリケーション]と連携して、AIエージェントが生産の変更が可能かどうかを議論して、その議論の経過状況を確認できる画面を作成してください。
 
 # 作成フォルダー
@@ -350,7 +350,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/supported-languages?tabs
 
 
 Azure Functionsのプロトタイプを作成するためのIssueです。
-```cmd
+```text
 Azure Functionsで動作するREST APIのアプリケーションのプロトタイプを作成してください。
 このAPIは以下のアプリケーションの中のJavaScriptのコードからREST APIで呼び出されます。
 
@@ -477,7 +477,7 @@ Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧�
 
 タスクとしてGitHubのIssueとして管理したい事もあり。GitHub Copilot Coding AgentにAPIの呼び出しを作成してもらいます。
 
-```cmd
+```text
 既存のJavaScriptのコードの中から、Azure Functions上で動作しているREST APIを呼び出すように修正をしてください。
 
 # 変更対象
@@ -532,7 +532,7 @@ Azure FunctionsのREST APIの中に、Azure Cosmos DBへデータを登録する
 
 GitHub Copilot Coding AgentのIssueです。
 
-```cmd
+```text
 Azure FunctionsのREST APIの中に、Azure Cosmos DBのNoSQL APIへデータを登録する処理を実装してください。
 
 # Applicationの場所
