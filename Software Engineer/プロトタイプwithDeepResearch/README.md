@@ -559,6 +559,8 @@ Azure FunctionsのREST APIの中に、Azure Cosmos DBのNoSQL APIへデータを
 
 ## 7. Azure への展開
 
+> &#x2757;&#xFE0F; **注意**: 作業中です...
+
 Azure Developer CLI (azd)を使用して、作成したコードをAzureにデプロイするスクリプトを作成します。
 
 どのフォルダーのアプリを、Azure上のどのサービスにデプロイするかを明示します。
