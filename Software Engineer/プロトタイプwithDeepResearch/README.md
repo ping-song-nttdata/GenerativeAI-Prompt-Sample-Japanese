@@ -87,7 +87,8 @@ Microsoft Azure、C#、F#、ASP.NET、Microsoft.Extensions、NuGet、など、Mi
 - `docs/`: ドキュメントを格納します。  
 - `test/`: テスト用のヘルパーおよびフィクスチャを格納します。  
 - `labs/`: 実験的なコードやプロトタイプを格納します。
-- `app/`: Webアプリケーションのコードを格納します。
+- `src/`: WebアプリケーションのBuild前のコードを格納します。  
+- `app/`: WebアプリケーションのBuild後コードを格納します。
 - `api/`: apiのコードを格納します。
 - `infra/`: インフラストラクチャのコードを格納します。
 
@@ -237,7 +238,10 @@ https://docs.github.com/ja/copilot/using-github-copilot/coding-agent/best-practi
 
 # 3. UI 作成
 
-**サンプルデータ**と、**機能要件のドキュメント**を添付します。
+**サンプルデータ**と、**機能要件のドキュメント**をリポジトリーにUploadして、そのファイルのURLを参照させます。
+
+GitHub Sparkを使う場合は、全てのサンプルデータとドキュメントを、そのままPromptの中に書き込みます。
+
 
 GitHub Copilot Coding AgentのIssueとして使います。Copilot君にIssueをAssignして、Issueのコメントに以下の様な内容を書いてください。
 
@@ -339,11 +343,12 @@ https://learn.microsoft.com/ja-jp/azure/static-web-apps/get-started-portal?tabs=
 
 # 4. REST API 作成
 
+Azure Functionsを使う場合は、事前にMicrosoft LearnのMCP Serverを参照できるようであれば、設定を行うことを強くお勧めします。
+
 Github Copilot Coding Agentに**API**のプロトタイプを作成してもらいます。ただし、Azure FunctionsのSDKのコードは不正確なことが多いです。
 ひな形まで作ってもらって。
 そのあとは、Visual Studio Codeなどで、GitHub Copilot for Azureを使って、実装を進めます。
 
-GitHub Copilot Coding AgentのIssueです。
 
 終了後は、Visual Studio Codeで、**自分で実行確認をする**ことを強くお勧めします。GitHub Codespaceだと、GitHub Copilotで幾つか使えるモデルが少なかったり、SDKのインストールが追加で必要だったりするので、開発を継続することを考えると、**自分のPCやMacのVisual Studio Code**での開発・テストの実施をお勧めします。
 
@@ -550,4 +555,23 @@ Azure FunctionsのREST APIの中に、Azure Cosmos DBのNoSQL APIへデータを
 
 # 参考ドキュメント:
 - https://learn.microsoft.com/ja-jp/azure/cosmos-db/nosql/quickstart-dotnet
+```
+
+## 7. Azure への展開
+
+Azure Developer CLI (azd)を使用して、作成したコードをAzureにデプロイするスクリプトを作成します。
+
+どのフォルダーのアプリを、Azure上のどのサービスにデプロイするかを明示します。
+
+Microsoft LearnのMCP Serverを参照するように指摘もします。 
+
+```text
+指定したアプリケーションフォルダ内のファイルを、指定したMicrosoft Azureの各サービス（例：Azure Static Web Apps）にデプロイするためのAzure Developer CLIコマンドを生成してください。コマンドの実行手順も日本語で、`README.md`ファイルに作成してください。
+
+**MicrosoftDocs**のMCP Serverを**必ず**使って、Azure Developer CLIの仕様を注意深く確認してください。Microsoft Azureの各サービスの仕様も、注意深く確認をしてください。
+
+# 対象アプリケーションのデプロイ設定
+- フォルダ: {/}
+  - 作成するAzureサービス: {Azure Static Web App}
+
 ```
