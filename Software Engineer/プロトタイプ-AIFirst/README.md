@@ -52,7 +52,7 @@ GitHubのRepositoryを作成します。GitHub Sparkや、GitHub Copilot Coding 
 
 # 2. Custom Instructionsの作成
 
-GitHubのRepositoryに、GitHub Copilot Coding Agentがより正確にタスクを実行できるようなcopilot-instructions.mdファイルを作成します。
+GitHubのRepositoryに、GitHub Copilot Coding Agentがより正確にタスクを実行できるような`.github/copilot-instructions.md`ファイルを作成します。
 
 以下、例、です。
 
@@ -244,7 +244,7 @@ https://docs.github.com/ja/copilot/using-github-copilot/coding-agent/best-practi
 GitHub Sparkを使う場合は、全てのサンプルデータとドキュメントを、そのままPromptの中に書き込みます。
 
 > [!IMPORTANT]
-> GitHub SparkはReactとTypeScriptしか対応していません。
+> GitHub Sparkは**React**と**TypeScript**しか対応していません。
 
 GitHub Copilot Coding AgentのIssueとして使います。Copilot君にIssueをAssignして、Issueのコメントに以下の様な内容を書いてください。
 
@@ -362,11 +362,15 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/supported-languages?tabs
 [マイクロサービスの定義書](Documentation.md#step41-マイクロサービスの定義書の作成)
 
 ```text
-Azure Functionsで動作するREST APIのアプリケーションのプロトタイプを作成してください。
-このAPIは以下のアプリケーションの中のJavaScriptのコードからREST APIで呼び出されます。
+{マイクロサービスの定義書}を熟読して、マクロサービスのREST APIを、{作成フォルダー}に作成してください。
 
 # 作成フォルダー
-- {api/サービス名}
+- api/{Service名}
+
+このREST APIは、{ユースケース}の一部分となります。
+
+# ユースケース
+ - docs/UC-{001}}.md
 
 # 技術仕様
 - Azure Functions v4
@@ -375,8 +379,14 @@ Azure Functionsで動作するREST APIのアプリケーションのプロトタ
 - Trigger: HTTP
 - Bind: inもoutもHTTP
 
-# マイクロサービスの定義書
-{マイクロサービスの定義書の内容}
+技術仕様の詳細については、以下のMCP Serverを使って必要な情報を入手してください。
+
+# MCP Server名
+- MicrosoftDocs
+
+
+## 注意事項
+- 機能の概要説明やアプリケーションの起動手順を日本語で`/README.md`に追記する。
 ```
 
 ## 4.b. HTMLからのAPIプロトタイプ作成
@@ -487,7 +497,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/create-first-function-vs
 
 ## 4.2. Azure Functionsへデプロイ
 
-Azure Functionsへデプロイをします。Visual Studio Codeから行うのが簡単です。
+REST APIのエンドポイント(FQDN)を作るために、Azure Functionsへデプロイをします。Visual Studio Codeから行うのが簡単です。
 
 クイックスタート: Visual Studio Code を使用して Azure に C# 関数を作成する:
 

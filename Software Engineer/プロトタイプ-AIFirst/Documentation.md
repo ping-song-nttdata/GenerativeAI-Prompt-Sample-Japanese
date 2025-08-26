@@ -151,6 +151,8 @@ Step.1 で作成したLoopのファイルを**作業コンテンツ** (添付フ
 ユースケースを1つだけ選択して、そのユースケースの詳細を作成します。
 step.2.1でのチャットを継続するのがおススメです。
 
+ここから先の全てのチャットの出力した情報をユースケースの単位でMarkdownにします。Microsoft 365 Copilot Chatを使っている場合は、**Pageに編集**で、Loopのファイルとして保存するのが便利です。
+
 ```text
 # タスク
 - 対象のユースケース（JBO-UC-001: 電子申請・電子決裁）について、ソフトウェアとして独自に実装するための、できる限り詳細かつ具体的で深い、ユースケースを作成してください。
@@ -209,6 +211,9 @@ step.2.1でのチャットを継続するのがおススメです。
 
 ### 16. **メモ・補足情報 (Notes and Issues)**
 - その他の注意点、未解決の課題など
+
+# ガイドライン
+- はじめに行う作業の概要を、3～7項目程度のコンセプチュアルなチェックリストとして簡潔に示してください。
 ```
 
 ## Step 3. 画面とAPIとデータモデルの作成
@@ -228,7 +233,38 @@ step.2.1でのチャットを継続するのがおススメです。
 - はじめに行う作業の概要を、3～7項目程度のコンセプチュアルなチェックリストとして簡潔に示してください。
 ```
 
-### Step 3.2. マッピング表の作成
+### Step 3.2. 画面遷移図の作成
+
+```text
+対象のユースケース（JBO-UC-001: 電子申請・電子決裁）において、ユーザーが利用する画面の一覧と画面遷移図を作成してください。
+
+## 出力形式
+
+### 1. 画面一覧（Screen List）
+以下の形式で画面をリストアップしてください。。次の情報を含めてください：
+- screen_id: 画面ごとの一意のID
+- screen_name: 画面名
+- description: 画面の簡単な説明
+- function_type: 主要機能（例：入力フォーム、承認画面、完了画面など）
+
+### 2. 画面遷移図（Screen Transition Diagram）
+画面遷移図は、テキストベースで画面IDまたは画面名をノードとして表現し、矢印（->）で遷移関係を記述してください。
+#### 例：
+[申請入力画面] -> [確認画面] -> [完了画面]
+                       ↓
+                [差し戻し画面]
+または上記と同様のテキスト記述で明確にしてください。
+
+### 3. エラーハンドリング
+画面の特定や遷移が曖昧または資料から判断できない場合は、その旨を備考または注意事項として明記してください。
+
+出力の最後に主要な成果物（画面一覧・遷移図）とエラーハンドリング内容を簡潔に検証し、問題がなければ次に進むか、必要なら修正を行ってください。
+
+# ガイドライン
+- はじめに行う作業の概要を、3～7項目程度のコンセプチュアルなチェックリストとして簡潔に示してください。
+```
+
+### Step 3.3. マッピング表の作成
 
 画面とAPIとデータの関連性を整理します。
 
@@ -245,7 +281,7 @@ step.2.1でのチャットを継続するのがおススメです。
   - 画面名
   - 画面内の主要な機能（例：検索、登録、削除など）
   - その機能が「画面内処理」か「API呼び出し」かを明示
-  - API呼び出しの場合は、エンドポイント、HTTPメソッド、主要パラメータを記載
+  - API呼び出しの場合は、API ID、API名、エンドポイント、HTTPメソッド、主要パラメータを記載
   - APIが管理するデータ（SoT）を明記
 - 最後に、APIサービスと管理データの責務マッピング表も追加してください
 
@@ -265,7 +301,15 @@ step.2.1でのチャットを継続するのがおススメです。
 
 
 
-### Step 3.3. 生成AIに最適化した画面作成のためのプロンプトの作成
+## Step 4. 生成AIに最適化したプロンプトの作成
+
+Step 3で作成したユースケースの情報をもとに、生成AIに最適化したプロンプトを作成します。
+
+> [!NOTE]
+> Microsoft 365 CopilotでPageを作成すると、それは自分のLoopのMy Workspaceに保存されます。別のチャットの中で、**作業コンテンツ**として指定することができます。作業コンテンツの検索結果に反映されるまで数分かかる場合があります。
+
+
+### Step 4.1. 画面の作成
 
 画面定義書は、既存のドキュメントを強く意識している「人」が理解しやすいであろう構造化情報として作成されています。
 
@@ -279,7 +323,7 @@ step.2.1でのチャットを継続するのがおススメです。
 - 作成の対象は、{画面名}です。
 - 作成する内容は、{指示書のガイドライン}をチェックリストとしてだけ**必ず**遵守して、深く分析・解釈してください。書式は{指示書のガイドライン}とは別でよいです。
 - 作成する書式などについては{最適化された指示書の例}も必ず参考にしてください。
-- 先に作成した{日本語のサンプルデータ}を、データとして必ず追記してください。データが入っている事で、画面の作成後に、即座に利用することができるようにしてください。
+- 先に作成した{日本語のサンプルデータ}の全てのデータを、データとして必ず追記してください。データが入っている事で、画面の作成後に、即座に利用することができるようにしてください。
 ---
 
 # 指示書のガイドライン
@@ -385,110 +429,15 @@ step.2.1でのチャットを継続するのがおススメです。
 - Please create a word search game. The game should take in a set of words from the user, then create a word search puzzle containing those words, as well as a word bank listing the words. Words in the puzzle can be horizontal, vertical, diagonal, forwards, and backwards, and are "found" when the user clicks and drags their mouse across them. Once all words are found, give the user the option to create a new puzzle.
 - Please add a leaderboard and a timer to the game. The timer should start when the user generates a new puzzle, then stop when all words are found. The user should then be able to enter their name, and their name, time, and the number of words in their puzzle should be displayed on the leaderboard. The leaderboard should be sortable in ascending and descending order by each of the three categories.
 - Please prevent users from entering words longer than the number of rows or columns in the puzzle. Additionally, add an option to change the size of a puzzle. If the user tries to enter a word that's longer than the current size of the puzzle, display an error message telling them that provided words must be less than or equal to the size of the puzzle.
+
+# ガイドライン
+- はじめに行う作業の概要を、3～7項目程度のコンセプチュアルなチェックリストとして簡潔に示してください。
 ```
 
 参考:
 https://docs.github.com/en/copilot/tutorials/easy-apps-with-spark
 
-### (Option) Step 3.4. 画面コンポーネントの設計
-
-選択した画面をComposite UIにするために、画面コンポーネント設計を行います。
-
-```text
-詳細な画面コンポーネント設計（Atomic）を作成してください。
-```
-
-### (Option) Step 3.4. 画面定義書の作成
-
-リストアップされた中から、1つだけ選択して、画面定義書を作成します。
-
-```text
-# 目的
-対象の{画面ID :	画面名}について、{画面定義書}のフォーマット・設計ルールに従って、プログラマーが実装できる詳細かつ深さの画面定義書のドキュメントを作成してください。
-
-## 画面定義書
-
-### 0. メタ情報（前提・識別子）
-- **画面ID**：`SCREEN_xxx`
-- **名称**：例）ユーザー一覧
-- **URL/ルート**：例）`/users?query&sort&page`
-- **対象ロール/権限**：例）Admin, Manager（RBAC/ABAC要件）
-- **依存API/テーブル**：例）`GET /api/users`, `users`, `roles`
-- **状態モデル**（主要ストア/キャッシュキー）：例）`users:list`, `filters`, `selection`
-- **前提条件**：例）認証済、組織選択済
-- **非機能要件**（概要）：性能目標、A11y、i18n、レスポンシブ方針
-
-### 1. 目的（ユーザー価値・完了条件）
-- **目的**：この画面でユーザーが達成すべきこと（例：ユーザーの検索・閲覧・一括操作）
-- **完了条件（Definition of Done）**：成功シナリオ/代替シナリオ/中断条件
-- **主要ユースケース**：Top3の業務フロー（As-Is→To-Beの差分があれば記載）
-
-### 2. 主なコンポーネント（UI構成・条件表示・データバインド）
-- **レイアウト**：ヘッダー/サイドバー/メイン/フッター、ブレークポイント別挙動
-- **コンポーネント一覧**（ID、種別、データバインド、可視条件、A11y）
-  - 例）`searchForm`（フォーム）：`filters` に双方向バインド、`role=search`、EnterでSubmit
-  - 例）`dataGrid`（一覧）：`users` コレクションにバインド、仮想スクロール、行選択可
-  - 例）`bulkActions`（ツールバー）：`selection.length > 0` で可視
-- **状態遷移**：`idle → loading → success|error`、ローディング/空/エラー表示仕様
-- **フォーカス順**：タブ順序、キーボード操作、スクリーンリーダーラベル
-
-### 3. 入力・検証（フィールド仕様・ルール・メッセージ）
-> **フィールド仕様表**（必要に応じて追加列可）
-
-例)
-| フィールドID | ラベル | 型/フォーマット | 必須 | 入力制約（長さ/範囲/パターン） | 依存/相関 | 既定値 | 検証タイミング | エラーメッセージ（i18nキー） | A11y（説明/ARIA） | セキュリティ（PII/マスク） |
-|---|---|---|---|---|---|---|---|---|---|---|
-| `email` | メール | email | ◯ | RFC準拠 | 一意性 | なし | onBlur + onSubmit | `errors.email.invalid` | `aria-describedby=emailHelp` | PII、表示時マスク |
-| `password` | パスワード | password | ◯ | 8–64/複合規則 | なし | なし | onChange強度、onSubmit | `errors.password.weak` | 非表示/トグル | 機密、保存禁止 |
-
-- **同期検証**：必須/型/桁数/パターン/相関（開始日≦終了日 等）
-- **非同期検証**：重複チェック、存在確認、権限チェック、レート制限
-- **エラー表示**：フィールド内/サマリー/トースト、文言、一貫したUXルール
-- **マスキング/フォーマッタ**：入力中と表示時の差、IME考慮
-
-### 4. アクション（イベント→処理→API→結果反映）
-- **イベント一覧**（発火条件、ハンドラ、ガード条件）
-  - 例）`searchForm.submit` → `GET /api/users`（クエリ構築、キャンセル可能）
-  - 例）`dataGrid.rowClick` → 詳細へ遷移（`/users/:id`）
-  - 例）`bulkActions.delete` → 確認モーダル → `DELETE /api/users`（一括）
-- **APIコール仕様**（メソッド・エンドポイント・ペイロード・ステータス・エラー）
-- **結果反映**：楽観UI/悲観ロック、キャッシュ無効化/部分更新、Undo/リトライ方針
-- **ナビゲーション**：戻る/進む、ルーティングガード（未保存警告）
-- **並行制御**：多重送信防止、デバウンス/スロットリング、同時編集中の衝突解決
-- **権限**：操作ごとのRBAC/ABAC条件（UI非表示 vs 非活性 vs 実行時ガード）
-
-### 5. 通知・連携（ユーザー通知・外部システム）
-- **UI通知**：トースト/バナー/モーダル、重要度/自動クローズ、フォーカス移動
-- **システム通知**：メール/Slack/Teams、テンプレートID、送信トリガー、再送戦略
-- **外部連携**：Webhook（URL、ヘッダー、署名）、メッセージング（キュー/トピック、イベント名、ペイロードスキーマ）
-- **CMS/翻訳連携**：文言キー、動的差し込み、言語フォールバック
-
-### 6. 監査（証跡・ログ・保持・可観測性）
-- **監査対象イベント**：誰が/いつ/何を/どこで/結果/相手先（IP/UA/リクエストID）
-- **ログスキーマ**：`traceId`, `spanId`, `actorId`, `tenantId`, `screenId`, `action`, `before`, `after`, `reason`
-- **PII/機微情報**：保存禁止/ハッシュ化/トークナイズ/マスキングの規約
-- **保持期間/削除**：法令/社内規定準拠、エクスポート/開示リクエスト対応
-- **改ざん防止**：WORMストレージ/署名チェーン/整合性チェック
-- **可観測性**：メトリクス（TTFB、FCP、INP、失敗率、再試行率）、ダッシュボード/アラート閾値
-
-## 非機能要件（共通追記セクション：推奨）
-
-- **性能予算**：FCP < 2.0s、INP < 200ms、API 95p < 300ms、クエリ応答 < 500ms  
-- **アクセシビリティ**：WCAG 2.2 AA、キーボード操作完備、ラベル/説明、コントラスト  
-- **レスポンシブ**：主要ブレークポイント・列折り返し・コンパクト行高の定義  
-- **i18n**：文言キー、数字/日付/通貨フォーマット、方向性（LTR/RTL）対応の有無  
-- **エラー/空/ローディング**：必ずモック含め視覚設計（スクルトン/プレースホルダ）  
-- **セキュリティ**：CSRF/XSS対策、CSP、権限漏れのUI非表示、秘密情報のログ禁止  
-- **テレメトリ**：画面別PV/滞在、主要CTAのCTR、失敗率、再試行率、NPSトリガー  
-- **テスト観点**：ユニット/コンポーネント/E2E、主要フローと境界値、A11y自動テスト
-
-```
-
-## Step.4. マイクロサービスの定義書の作成
-
-[Step 3.2. 画面マッピング表の作成](./documentation.md/#step-32-画面マッピング表の作成) で作成した画面マッピング表を作業ファイルとして添付します。
-
-### Step.4.1. マイクロサービスの定義書の作成
+### Step.4.2. マイクロサービスの定義書の作成
 
 Prompt:
 
@@ -599,76 +548,6 @@ Prompt:
 - **JSON Schema（概念版）**：`Template`, `FieldDefinition`, `AttachmentPolicy` の最低限属性。  
 - **用語集／語彙**：ラベル、状態、エラーコードの辞書。
 
-```
-
-
-### (Option) Step. 4.2. 機能要件作成
-
-機能要件書を作成します。
-
-[Step 3.2. 画面マッピング表の作成](./documentation.md/#step-32-画面マッピング表の作成) で作成した画面マッピング表を作業ファイルとして添付します。
-
-情報量が多い場合は、ファイルを分割した方が、より詳細な情報を作成してくれます。
-
-```text
-# 目的
-- 指定された機能要件（JBO-FR-001: 電子申請）のみについて、{機能要件書の項目}に沿った、ソフトウェアとして実装するための可能な限り詳細かつ具体的かつ深い機能要件書を作成してください。
-
-## 機能要件書の項目
-
-### 1. **はじめに（Introduction）**
-- **目的（Purpose）**  
-  ドキュメントの目的と読者の想定。
-- **スコープ（Scope）**  
-  対象となるシステムやアプリケーションの範囲。
-- **定義と略語（Definitions and Acronyms）**  
-  用語の定義、略語の説明。
-
-### 2. **全体概要（Overall Description）**
-- **ビジネス背景と目的（Business Context and Goals）**
-- **ユーザーの概要（User Characteristics）**
-- **前提条件と制約（Assumptions and Constraints）**
-- **依存関係（Dependencies）**
-
-### 3. **機能要件（Functional Requirements）**
-各機能をユースケースまたは機能単位で記述：
-
-- **機能ID（Requirement ID）**
-- **機能名（Function Name）**
-- **説明（Description）**
-- **入力（Inputs）**
-- **出力（Outputs）**
-- **前提条件（Preconditions）**
-- **事後条件（Postconditions）**
-- **例外処理（Exception Handling）**
-- **関連ユースケース（Related Use Cases）**
-
-### 4. **ユーザーインターフェース要件（UI Requirements）**
-- 画面レイアウト、ナビゲーション、入力項目、バリデーションルールなど。
-
-### 5. **外部インターフェース要件（External Interfaces）**
-- **API仕様**
-- **外部システムとの連携**
-- **データフォーマット（JSON, XMLなど）**
-
-### 6. **データ要件（Data Requirements）**
-- **データモデル（ER図など）**
-- **データ項目の定義**
-- **データの整合性ルール**
-
-### 7. **セキュリティ要件（Security Requirements）**
-- **認証・認可**
-- **データ暗号化**
-- **監査ログ**
-
 # ガイドライン
 - はじめに行う作業の概要を、3～7項目程度のコンセプチュアルなチェックリストとして簡潔に示してください。
-```
-
-## (Option) コンポーネントモデル作成
-
-共通機能ですね。
-
-```text
-{機能要件}の中のデータやフロー、画面など、共通化できるコンポーネントをリストアップしてください。
 ```
