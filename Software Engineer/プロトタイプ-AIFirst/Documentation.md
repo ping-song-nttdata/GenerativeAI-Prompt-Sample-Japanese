@@ -437,7 +437,7 @@ Step 3で作成したユースケースの情報をもとに、生成AIに最適
 参考:
 https://docs.github.com/en/copilot/tutorials/easy-apps-with-spark
 
-### Step.4.2. マイクロサービスの定義書の作成
+### Step.4.2. ms.portal.azure.comの作成
 
 Prompt:
 

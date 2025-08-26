@@ -1,18 +1,53 @@
 # アプリケーションのプロトタイプ開発 (GitHub Copilot Coding Agent / GitHub Copilot for Azure)
 
-要求定義の作成をしたドキュメントを入力データとして、プロトタイプの開発を行っていきます。
+ここでは、ユーザーを早期に巻き込むフィードバックループを目的に以下の順番で進めていきます。
+
+# ドキュメント
+
+要求定義で作成をしたドキュメントを入力データとして、プロトタイプの開発を行っていきます。
 
 幾つかのファイルはGitHubのRepositoryにUploadして、そのURLを参照させる形で、GitHub Copilot Coding Agentに作業をしてもらいます。
 
 
-# プロトタイプの位置づけ
+## /docs フォルダーに置きたいドキュメント
+- ユースケース
+  - コードの元となるドキュメント。
+  - ファイル名の例: UC-001.md
+  - [Prompt](./Documentation.md#step22-ユースケース作成)
+- マイクロサービス定義書
+  - REST APIのエンドポイント
+  - ファイル名の例: UC-001_DashboardService.md
+  - [Prompt](./Documentation.md#step-33-マッピング表の作成)
+- データモデル
+  - データの定義。アプリケーションの場合は、Azure Cosmos DBのSQL API (ドキュメント型)のモデルがおススメ
+  - ファイル名の例: UC-001-DataModel.md
+  - [Prompt](./Documentation.md#step-31-データモデル作成)
 
-ここでは、ユーザーを早期に巻き込むフィードバックループを目的に以下の順番で進めていきます。
+
+Microsoft 365 Copilot Chatでドキュメントを作成した場合には、チャットの出力結果の下のコマンドのアイコンの、**応答をコピー**で出力結果が取得できます。
+Visual Studio CodeなどMarkdownのプレビューが出来るツールを使って、Markdown形式で保存してください。
 
 # ツール
-GitHub Copilot の **Coding Agent**のIssueからCoding Agentに作業をしてもらう前提です。
 
-https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/
+- GitHub Copilot Coding Agent
+
+  GitHub Copilot の **Coding Agent**のIssueからCoding Agentに作業をしてもらう前提です。
+
+  https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/
+
+- GitHub Copilot Spark
+  Reactでの画面作成とGitHubのRepositryとの同期による、プレビューが秀逸です。
+
+  https://github.com/features/spark?locale=ja
+
+- Visual Studio Code
+
+  **Visual Studio Code**の利用も強くおススメします。
+  - Markdownのプレビュー機能を活用して、ドキュメントの確認や編集
+  - Azure MCP Serverを利用した、各種Azure上のリソース一覧の文字列作成
+  - GitHubリポジトリへ人が作成するファイルの追加
+  - GitHub Copilotが作成したコードのテストや修正
+  - GitHub Copilot Agentモードによるコーディング支援
 
 ## 必読ドキュメント!!!
 
@@ -353,7 +388,7 @@ Github Copilot Coding Agentに**API**のプロトタイプを作成してもら�
 Azure Functions でサポートされている言語:
 https://learn.microsoft.com/ja-jp/azure/azure-functions/supported-languages?tabs=isolated-process%2Cv4&pivots=programming-language-csharp
 
-## 4.a. 要求定義のドキュメントで定義したAPIからの作成
+## 4.1. 要求定義のドキュメントで定義したAPIからの作成
 
 画面内の処理について、以下のドキュメントを作成済みの場合は、そちらを優先します。このPromptにAPI部分のみを記載して、GitHub Copilot Coding Agentに作業をしてもらいます。
 
@@ -370,7 +405,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/supported-languages?tabs
 このREST APIは、{ユースケース}の一部分となります。
 
 # ユースケース
- - docs/UC-{001}}.md
+ - docs/UC-{001}.md
 
 # 技術仕様
 - Azure Functions v4
@@ -387,103 +422,6 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/supported-languages?tabs
 
 ## 注意事項
 - 機能の概要説明やアプリケーションの起動手順を日本語で`/README.md`に追記する。
-```
-
-## 4.b. HTMLからのAPIプロトタイプ作成
-
-こちらは、先に作成したHTMLから、Azure Functionsのプロトタイプを作成するためのIssueです。
-```text
-Azure Functionsで動作するREST APIのアプリケーションのプロトタイプを作成してください。
-このAPIは以下のアプリケーションの中のJavaScriptのコードからREST APIで呼び出されます。
-
-# 作成フォルダー
-- {api}
-
-# 呼び出し元のWebアプリケーション
-- アプリケーション名: {app}
-- JavaScriptのファイルの場所: {app}/js
-	- それぞれの.jsファイルから、新規に作成するAPIを呼び出す
-
-# 技術仕様
-- Azure Functions v4
-- C#
-- .NET9.0
-- Trigger: HTTP
-- Bind: inもoutもHTTP
-
-# タスク
-- APIが完成してAzure Functionsにデプロイをした後で、Webアプリケーション側のコードの変更を行う
-- 単体で呼び出せるようにする
-- 日本語の詳細なセットアップ手順書を作成する。手順書は作成フォルダーの中に作成する
-
-# APIに実装する機能
-- {APIの分類の例}を参考にして、JavaScriptの関数をフロントエンドとバックエンドに分類して実装する
-- バックエンドのAPIのみを、Azure Functionsで実装する
-- サンプルデータは、全てデータ管理のAPIの中に実装する
-
-# APIの分類の例
-## フロントエンド（Front）で主に実装・担当する関数
-
-1. **イベントハンドラー**
-   - 画面上のユーザー操作（クリック、入力、送信など）に反応する関数
-   - 例: `onClickButton()`, `onInputChange()`
-
-2. **UI操作・DOM操作**
-   - 画面の表示・非表示、要素の追加・削除・更新など
-   - 例: `showModal()`, `updateListView()`
-
-3. **バリデーション（クライアント側）**
-   - 入力値の形式チェックや必須項目の確認など
-   - 例: `validateEmailFormat()`, `checkRequiredFields()`
-
-4. **状態管理（クライアント側）**
-   - 画面の状態や一時的なデータの保持
-   - 例: `setCurrentTab()`, `updateLocalState()`
-
-5. **初期化・セットアップ**
-   - ページロード時の初期化処理
-   - 例: `initPage()`, `loadInitialView()`
-
-6. **エラーハンドリング（UI通知）**
-   - エラー発生時の画面表示やユーザー通知
-   - 例: `showErrorMessage()`
-
-7. **ユーティリティ（フロント専用）**
-   - 画面表示用のフォーマット変換など
-   - 例: `formatDisplayDate()`
-
-## バックエンド（Backend）で主に実装・担当する関数（将来REST API化する候補）
-
-1. **データアクセス・データ取得**
-   - データベースや外部サービスとのやりとり
-   - 例: `fetchUserList()`, `saveOrderData()`
-
-2. **データ加工・変換（ビジネスロジック）**
-   - データの集計、フィルタリング、計算など
-   - 例: `calculateTotalAmount()`, `filterActiveUsers()`
-
-3. **バリデーション（サーバー側）**
-   - セキュリティや整合性のための入力チェック
-   - 例: `validateUserInputOnServer()`
-
-4. **状態管理（サーバー側）**
-   - ユーザーセッションやアプリ全体の状態管理
-   - 例: `updateUserSession()`
-
-5. **API通信**
-   - REST APIとして外部公開する関数
-   - 例: `getUserDataAPI()`, `postOrderAPI()`
-
-6. **エラーハンドリング（サーバー側）**
-   - サーバーでのエラー処理やログ記録
-   - 例: `logError()`, `returnErrorResponse()`
-
-7. **ユーティリティ（サーバー専用）**
-   - サーバー側でのみ必要な共通処理
-   - 例: `hashPassword()`, `generateToken()`
-
-# ノート
-- README.md は、作成フォルダーの中に日本語で作成する。
 ```
 
 Coding Agentの作業が終了するまで待ちます。終了後のbranchは**削除せずに**残しておいてください**。後で、Visual Studio Codeでの開発に使います。
@@ -505,7 +443,19 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/create-first-function-vs
 
 開発言語に応じて、周辺からドキュメントを探してみてください。
 
-## 4.3. Azure FunctionsにデプロイされたURLのドキュメントへの記載
+## 4.3. 仕様書としてのユースケースのドキュメントにAPIの情報を追記
+
+## 4.3.1. Azure上で動作しているAPIの一覧取得
+
+> [!WARNING]
+> 作業中です。
+
+Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧取得のコードを作成します。
+```
+@azure Azure Functionsの関数一覧を作成してください。関数名、FQDN付のURL、関数の説明、入出力の詳細な説明を含めてください。Markdownの書式で作成してください。
+```
+
+## 4.3.2. Azure FunctionsにデプロイされたURLのドキュメントへの記載
 
 > [!WARNING]
 > 作業中です。
@@ -521,16 +471,6 @@ Azure Functionsで動作している関数の中から、{サービス名}のFQD
 # 5. HTMLの画面とREST APIの連携
 GitHub Copilot Coding Agentに、HTMLの画面とAPIの連携を作成してもらいます。
 
-## 5.1. APIの一覧取得
-
-> [!WARNING]
-> 作業中です。
-
-
-Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧取得のコードを作成します。
-```
-@azure Azure Functionsの関数一覧を作成してください。関数名、FQDN付のURL、関数の説明、入出力の詳細な説明を含めてください。Markdownの書式で作成してください。
-```
 
 ## 5.2. REST APIの呼び出し
 
