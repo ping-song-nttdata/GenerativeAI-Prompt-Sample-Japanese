@@ -2,31 +2,6 @@
 
 ここでは、ユーザーを早期に巻き込むフィードバックループを目的に以下の順番で進めていきます。
 
-# ドキュメント
-
-要求定義で作成をしたドキュメントを入力データとして、プロトタイプの開発を行っていきます。
-
-幾つかのファイルはGitHubのRepositoryにUploadして、そのURLを参照させる形で、GitHub Copilot Coding Agentに作業をしてもらいます。
-
-
-## /docs フォルダーに置きたいドキュメント
-- ユースケース
-  - コードの元となるドキュメント。
-  - ファイル名の例: UC-001.md
-  - [Prompt](./Documentation.md#step22-ユースケース作成)
-- マイクロサービス定義書
-  - REST APIのエンドポイント
-  - ファイル名の例: UC-001_DashboardService.md
-  - [Prompt](./Documentation.md#step-33-マッピング表の作成)
-- データモデル
-  - データの定義。アプリケーションの場合は、Azure Cosmos DBのSQL API (ドキュメント型)のモデルがおススメ
-  - ファイル名の例: UC-001-DataModel.md
-  - [Prompt](./Documentation.md#step-31-データモデル作成)
-
-
-Microsoft 365 Copilot Chatでドキュメントを作成した場合には、チャットの出力結果の下のコマンドのアイコンの、**応答をコピー**で出力結果が取得できます。
-Visual Studio CodeなどMarkdownのプレビューが出来るツールを使って、Markdown形式で保存してください。
-
 # ツール
 
 - GitHub Copilot Coding Agent
@@ -78,7 +53,33 @@ https://learn.microsoft.com/ja-jp/azure/developer/github-copilot-azure/introduct
 
 こちらのドキュメントを参考にしてください。
 
-[要求定義の作成][def]
+[要求定義の作成](..Documentation-and-design.md)
+
+## 0.1. 作成結果のドキュメントの保存場所
+
+要求定義で作成をしたドキュメントを入力データとして、プロトタイプの開発を行っていきます。
+
+幾つかのファイルはGitHubのRepositoryにUploadして、そのURLを参照させる形で、GitHub Copilot Coding Agentに作業をしてもらいます。
+
+
+### /docs フォルダーに置きたいドキュメント
+- ユースケース
+  - コードの元となるドキュメント。画面一覧、サービス一覧、マッピング表なども、強い関連性を考慮するとこのファイルに入れておくのが良いかと思います。
+  - ファイル名の例: UC-001.md
+  - [Prompt](..Documentation-and-design.md#step22-ユースケース作成)
+- マイクロサービス定義書
+  - REST APIのエンドポイント
+  - ファイル名の例: UC-001_DashboardService.md
+  - [Prompt](..Documentation-and-design.md#step-33-マッピング表の作成)
+- データモデル
+  - データの定義。アプリケーションの場合は、Azure Cosmos DBのSQL API (ドキュメント型)のモデルがおススメ
+  - ファイル名の例: UC-001-DataModel.md
+  - [Prompt](..Documentation-and-design.md#step-31-データモデル作成)
+
+
+Microsoft 365 Copilot Chatでドキュメントを作成した場合には、チャットの出力結果の下のコマンドのアイコンの、**応答をコピー**で出力結果が取得できます。
+Visual Studio CodeなどMarkdownのプレビューが出来るツールを使って、Markdown形式で保存してください。
+
 
 # 1. GitHubのRepositoryの作成
 
