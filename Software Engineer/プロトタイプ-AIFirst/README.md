@@ -122,6 +122,7 @@ Microsoft Azure、C#、F#、ASP.NET、Microsoft.Extensions、NuGet、など、Mi
 - `admin/`: 管理者向けインターフェースのコンポーネントを含みます。  
 - `config/`: 設定ファイルおよびテンプレートを格納します。  
 - `docs/`: ドキュメントを格納します。  
+- `data/`: アプリケーションで使用するデータファイルを格納します。  
 - `test/`: テスト用のヘルパーおよびフィクスチャを格納します。  
 - `labs/`: 実験的なコードやプロトタイプを格納します。
 - `src/`: WebアプリケーションのBuild前のコードを格納します。  
@@ -288,14 +289,13 @@ GitHub Copilot Coding AgentのIssueとして使います。Copilot君にIssueを
 
 ```text
 # 目的
-Webアプリケーションのプロトタイプを作成してください。
+Webアプリケーションの画面を作成してください。
 
 # 機能要件
 添付ドキュメントにはソフトウェアの機能要件が記載されています。指定された範囲内の機能要件【{範囲}】のみを作成対象とします。
 
 ## 作業範囲
-- 下記の機能要件から1つ選択
-- 機能ID（Requirement ID）: {あれば指定}
+- {画面ID: 画面名}
 
 ## 作成フォルダ
 - `{app}` ディレクトリ配下へ全ての成果物を設置
@@ -306,9 +306,6 @@ Webアプリケーションのプロトタイプを作成してください。
 
 ## 注意事項
 - 機能の概要説明やアプリケーションの起動手順を日本語で`/README.md`に記載する。
-- すべての出力は明確かつ構造化された形式で行ってください（例: JSON、Markdown Table など）。
-- 最初に取り組むべきポイントについて、3～7項目程度の簡潔なチェックリストを作成してください。各項目は概念レベルでまとめ、実装詳細には踏み込みません。
-- 全工程を通じて、出力に求められたJSON・Markdown Tableなどは必ずフォーマット通り構造化し、最後に完了内容の簡潔な検証（1-2文）を行い、問題があれば自己修正を試みてください。
 ```
 
 完成したら、Azure Static Web Appsにデプロイをします。これはAzureのPortalから行うのが簡単です。プロトタイプだという事もありまして。
@@ -393,20 +390,18 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/supported-languages?tabs
 
 画面内の処理について、以下のドキュメントを作成済みの場合は、そちらを優先します。このPromptにAPI部分のみを記載して、GitHub Copilot Coding Agentに作業をしてもらいます。
 
-[マッピング表](Documentation.md#step-32-マッピング表の作成)
+[マッピング表](Documentation-and-design.md#step-35-マッピング表の作成)
 
-[マイクロサービスの定義書](Documentation.md#step41-マイクロサービスの定義書の作成)
+[マイクロサービスの定義書](Documentation-and-design.md#step42-マイクロサービスの作成)
 
 ```text
-{マイクロサービスの定義書}を熟読して、マクロサービスのREST APIを、{作成フォルダー}に作成してください。
+{マイクロサービスの定義書}を参考にして、マクロサービスのREST APIを、{作成フォルダー}に作成してください。
+
+# マイクロサービス定義
+{マイクロサービス定書の文字列}
 
 # 作成フォルダー
 - api/{Service名}
-
-このREST APIは、{ユースケース}の一部分となります。
-
-# ユースケース
- - docs/UC-{001}.md
 
 # 技術仕様
 - Azure Functions v4
@@ -415,13 +410,11 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/supported-languages?tabs
 - Trigger: HTTP
 - Bind: inもoutもHTTP
 
-技術仕様の詳細については、以下のMCP Serverを使って必要な情報を入手してください。
-
-# MCP Server名
-- MicrosoftDocs
-
-
 ## 注意事項
+- このREST APIは、{ユースケース}の一部分となります。
+  - docs/UC-{001}.md
+- {技術仕様}の詳細については、以下のMCP Serverを使って必要な情報を入手してください。
+  - MicrosoftDocs
 - 機能の概要説明やアプリケーションの起動手順を日本語で`/README.md`に追記する。
 ```
 
