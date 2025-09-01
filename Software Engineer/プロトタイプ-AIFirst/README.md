@@ -53,7 +53,7 @@ https://learn.microsoft.com/ja-jp/azure/developer/github-copilot-azure/introduct
 
 こちらのドキュメントを参考にしてください。
 
-[要求定義の作成](..Documentation-and-design.md)
+[要求定義の作成](Documentation-and-design.md)
 
 ## 0.1. 作成結果のドキュメントの保存場所
 
