@@ -420,6 +420,11 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/supported-languages?tabs
 
 Coding Agentの作業が終了するまで待ちます。終了後のbranchは**削除せずに**残しておいてください**。後で、Visual Studio Codeでの開発に使います。
 
+
+## 4.2. Azure Functionsへデプロイ
+
+REST APIのエンドポイント(FQDN)を作るために、Azure Functionsへデプロイをします。**Visual Studio Code**から行うのが簡単です。
+
 - Visual Studio CodeやGitHub Desktopなどを使って、Coding Agentが作成したコードをローカルにクローンします。
 - Visual Studio Codeで、Azure Functions Toolsなどを使って、ローカルでの動作確認をします。
 
@@ -427,13 +432,6 @@ Coding Agentの作業が終了するまで待ちます。終了後のbranchは**
 
 https://learn.microsoft.com/ja-jp/azure/azure-functions/create-first-function-vs-code-csharp
 
-## 4.2. Azure Functionsへデプロイ
-
-REST APIのエンドポイント(FQDN)を作るために、Azure Functionsへデプロイをします。Visual Studio Codeから行うのが簡単です。
-
-クイックスタート: Visual Studio Code を使用して Azure に C# 関数を作成する:
-
-https://learn.microsoft.com/ja-jp/azure/azure-functions/create-first-function-vs-code-csharp
 
 開発言語に応じて、周辺からドキュメントを探してみてください。
 
@@ -441,26 +439,27 @@ https://learn.microsoft.com/ja-jp/azure/azure-functions/create-first-function-vs
 
 ## 4.3.1. Azure上で動作しているAPIの一覧取得
 
-> [!WARNING]
-> 作業中です。
+Azure CLIを使用して、Azure上で動作しているAPIの一覧を取得します。実行場所は、**Visual Studio Code**の**ターミナル**がおススメです。
 
-Visual Studio Code の **GitHub Copilot for Azure**を使って、APIの一覧取得のコードを作成します。
+```cmd
+az functionapp function list --name <Azure Functionsのインスタンス名> --resource-group <Azure Functionsのリソースグループ名> --query "[].{Name:name, Endpoint:invokeUrlTemplate}" --output table > docs/functions-list.md
 ```
-@azure Azure Functionsの関数一覧を作成してください。関数名、FQDN付のURL、関数の説明、入出力の詳細な説明を含めてください。Markdownの書式で作成してください。
-```
+先に作成したAPIのURLを取得して、**テキストファイル**に出力します。ここでは`functions-list.md`ファイルにしています。複数回実施されても問題がないように、ファイル名はサービス名を付けるなど一意になるようにしてください。
+
+このテキストファイルは、マッピングファイルに反映されたら、削除しても構いません。
 
 ## 4.3.2. Azure FunctionsにデプロイされたURLのドキュメントへの記載
 
-> [!WARNING]
-> 作業中です。
 
-事前にAzure MCP Serverの設定をしてください。
+マッピング表のファイルと取得結果のファイルの双方を参照させて、マイクロサービスの一覧に追記します。
 
-先に作成したAPIのURLを取得して、マイクロサービスの一覧に追記します。
 
 ```text
-Azure Functionsで動作している関数の中から、{サービス名}のFQDN付のURLを取得してください。取得結果を`README.md`の{画面名}の画面別マッピング表に、`URL`の列が無ければ列を追加して、そのデータとして追記をしてください。
+詳細マッピング表のSCR-02の当該API IDのエンドポイントを、`docs/kpi-cat-url.txt`の当該EndPointで置き換えてください。
 ```
+
+正しく反映されたら、GitHubのリポジトリにPushします。
+
 
 # 5. HTMLの画面とREST APIの連携
 GitHub Copilot Coding Agentに、HTMLの画面とAPIの連携を作成してもらいます。
@@ -475,19 +474,105 @@ GitHub Copilot Coding Agentに、HTMLの画面とAPIの連携を作成しても�
 タスクとしてGitHubのIssueとして管理したい事もあり。GitHub Copilot Coding AgentにAPIの呼び出しを作成してもらいます。
 
 ```text
-既存のHTMLのJavaScriptから、Azure Functions上で動作しているREST APIを呼び出すように修正をしてください。
+画面を制御するコード内でREST APIのエンドポイント呼び出しを実装します。現状はスタブ呼び出しとなっています。
+スタブ呼び出しから、REST APIのエンドポイントを呼び出す実装に変更してください。
 
-# 変更対象
-- JavaScriptのファイルの場所: {app}/js
+# 対象コードファイル
+- `app/js/api.js`
 
-# 関数とAPIのマッピング
-- {JavaScriptの関数}:{Azure FunctionsのURL}
+# マッピング情報
+- `docs/uc-01_mapping.md`
+  - エンドポイントURL: Azure FunctionsのHTTPエンドポイントのURL
+
+# 置き換え対象画面と機能・サービス
+- 画面ID: `SCR-02`
+- SoT: `KPI-01`
+
+編集は対象ファイル内に限定し、リポジトリのコーディングスタイルに従い、レビューしやすい差分を作成してください。
 ```
 
-# 6. データを永続保存
+# 6. データ
 
 > [!WARNING]
 > 作業中です。
+
+それぞれのエンティティの適切なデータの保存を行います。Microsoft Azureの中で最適なサービスの候補を作成します。
+Microsoft LearnのMCP Serverを参照します。
+
+## 6.1. データサービスの選定
+
+GitHub Copilot でもいいですし。Microsoft 365 Copilot Chatでもいいかと思います。
+
+ここではCloud利用に最適な、Polyglot Persistenceのアーキテクチャを採用します。
+
+```text
+全てのエンティティの保存先のMicrosoft Azureのサービスを決定します。ユースケースを分析・解析して、{実行プラン}を必ず参照して、エンティティ毎に、データをどのMicrosoft Azureのサービスを使用すべきかを決定してください。なぜ、そのMicrosoft Azureのサービスにしたのかの具体的で説得力のある説明もしてください。
+
+Microsoft Azureのサービスやアーキテクチャについては、以下のMCP Serverから得られる情報も参考にしてください。
+
+# MCP Server
+- MicrosoftDocs
+
+# 対象エンティティ
+- docs/uc-01-entities.md
+
+# ユースケース
+- docs/uc-01-usercase.md
+
+# 実行プラン
+- Polyglot Persistenceのアーキテクチャを採用します
+- Polyglot Persistence（ポリグロット・パーシステンス）とは、**アプリケーションの異なる部分に最適なデータストアを選択して使い分けるアーキテクチャ**です。これにより、性能、スケーラビリティ、開発効率などを最適化できます。
+
+以下に、Polyglot Persistenceを設計する際の**詳細な手順**をステップバイステップで解説します。
+
+## 1. 要件の整理とデータの分類
+
+まずは、アプリケーション全体の要件を整理し、扱うデータを以下の観点で分類します：
+
+- **データの性質**：構造化／非構造化、リレーショナル／ドキュメント／グラフなど
+- **アクセスパターン**：読み取り中心／書き込み中心／頻繁な更新
+- **一貫性の要求**：強い整合性／最終的整合性
+- **スケーラビリティ**：水平スケーリングが必要か
+- **トランザクションの必要性**：ACID特性が必要か
+
+## 2. データストアの選定
+
+分類したデータごとに、最適なデータストアを選定します。以下は代表的な選択肢です：
+
+| データの種類 | 推奨データストア | 用途例 |
+|--------------|------------------|--------|
+| リレーショナル | SQL Database PostgreSQL, MySQL | ユーザー情報、トランザクション |
+| ドキュメント型 | Azure Cosmos DB | 商品カタログ、ブログ記事 |
+| キー・バリュー型 | Redis, Azure Table | キャッシュ、セッション管理 |
+| グラフ型 | Neo4j, Azure Cosmos DB | ソーシャルネットワーク、推薦システム |
+| 時系列 | InfluxDB, TimescaleDB | IoTデータ、ログ |
+| 検索エンジン | Azure AI Search | フルテキスト検索、ログ分析 |
+
+## 3. データモデルの設計
+
+各データストアに対して、以下を設計します：
+
+- スキーマ（必要に応じて）
+- インデックス
+- リレーション（または参照）
+- データの正規化／非正規化の方針
+
+---
+
+## 4. データの整合性と同期戦略
+
+複数のデータストアを使う場合、整合性の確保が重要です。以下の戦略を検討します：
+
+- **イベントソーシング**：変更をイベントとして記録し、各ストアに反映
+- **CDC（Change Data Capture）**：変更を検知して他のストアに反映
+- **デュアルライト**：アプリケーションが複数のストアに同時に書き込む（要注意）
+
+## 5. ドキュメントとナレッジ共有
+
+- 各データストアの用途と設計理由を明記
+- 開発者向けのガイドライン整備
+- 運用手順書の作成
+```
 
 
 データをAzure Cosmos DBへ保存をします。
