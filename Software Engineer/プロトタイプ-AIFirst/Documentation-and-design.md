@@ -587,8 +587,7 @@ Step 3.で作成したファイルを添付して、一つずつ作成してい�
 
 # タスク
 - 作成の対象は、{画面名}です。
-- 作成する内容は、{指示書のガイドライン}をチェックリストとしてだけ**必ず**遵守して、深く分析・解釈してください。書式は{指示書のガイドライン}とは別でよいです。
-- 作成する例として、{最適化された指示書の例}も必ず参考にしてください。
+- 作成する内容は、{指示書のガイドライン}をチェックリストとしてだけ**必ず**遵守して、深く分析・解釈してください。
 - 先に作成した{日本語のサンプルデータ}の全てのデータを、データとして必ず追記してください。データが入っている事で、画面の作成後に、即座に利用することができるようにしてください。
 ---
 
@@ -688,13 +687,6 @@ Step 3.で作成したファイルを添付して、一つずつ作成してい�
 * リーダーボードが公平で、ソート＋同率処理が定義されているか？
 * A11y・非機能要件が網羅されているか？
 * スコープ外が宣言されているか？
-
----
-
-# 最適化された指示書の例
-- Please create a word search game. The game should take in a set of words from the user, then create a word search puzzle containing those words, as well as a word bank listing the words. Words in the puzzle can be horizontal, vertical, diagonal, forwards, and backwards, and are "found" when the user clicks and drags their mouse across them. Once all words are found, give the user the option to create a new puzzle.
-- Please add a leaderboard and a timer to the game. The timer should start when the user generates a new puzzle, then stop when all words are found. The user should then be able to enter their name, and their name, time, and the number of words in their puzzle should be displayed on the leaderboard. The leaderboard should be sortable in ascending and descending order by each of the three categories.
-- Please prevent users from entering words longer than the number of rows or columns in the puzzle. Additionally, add an option to change the size of a puzzle. If the user tries to enter a word that's longer than the current size of the puzzle, display an error message telling them that provided words must be less than or equal to the size of the puzzle.
 
 # ガイドライン
 - はじめに行う作業の概要を、3～7項目程度のコンセプチュアルなチェックリストとして簡潔に示してください。

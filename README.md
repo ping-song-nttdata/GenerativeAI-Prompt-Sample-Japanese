@@ -10,7 +10,7 @@ GenerativeAI の Prompt のサンプルです。
 
 # Tool
 
-## 1. Microsoft Copliot (Bing Chat)
+## 1. Microsoft 365 Copliot)
 https://m365.cloud.microsoft/chat
 
 ## 2. Azure OpenAI Service
